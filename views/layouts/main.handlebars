@@ -9,14 +9,26 @@
 <body>
     <div id="wrapper">
         <div id="header">
-
+            {{#if loggedin}}
+                Welcome {{userName}}
+            {{else}}
+                Tech Blog
+            {{/if}}
         </div>
         <div id="navigation">
             <ul>
                 <li>
                     <a href="/">Home</a>
+                </li>
+                <li>
                     <a href="/dashboard">Dashboard</a>
-                    <a href="/logout">Logout</a>
+                </li>
+                <li>
+                    {{#if loggedin}}
+                        <a href="/logout">Logout</a>
+                    {{else}}
+                        <a href="/login">Login</a>
+                    {{/if}}
                 </li>
             </ul>
         </div>
