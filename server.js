@@ -3,6 +3,8 @@ let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let express = require('express');
 let exphbs  = require('express-handlebars');
+let moment = require('moment');
+let path = require('path');
 let app     = express();
 let hbsContent = {
     userName: '',
@@ -11,13 +13,23 @@ let hbsContent = {
     body: 'Hello World',
     blogs: []
 };
+
+let hbsEngine = exphbs.create({
+    helpers: {
+        formatDate: function (date, format) {
+            return moment(date).format(format);
+        }
+    }
+});
+
 // support parsing of application/json type post data
 app.use(express.json());
 
 //support parsing of application/x-www-form-urlencoded post data
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.engine('handlebars', exphbs());
+app.use(express.static(path.join(__dirname, '/public/')));
+app.engine('handlebars', hbsEngine.engine);
 app.set('view engine', 'handlebars');
 
 app.use(session({
@@ -110,6 +122,29 @@ app.route('/home').get(async (req, res) => {
         hbsContent.blogs = JSON.parse(JSON.stringify(blogs_));
         res.render('home', hbsContent);
     }else{
+        res.redirect('/login');
+    }
+})
+
+app.route('/blog/:id').get(async (req, res) => {
+    if(req.session.user && req.cookies.user_sid){
+        hbsContent.loggedin = true;
+        hbsContent.userName = req.session.user.username;
+        hbsContent.title = "You are logged in";
+        const blog = await Blog.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [
+                { model: User, as: 'user' }
+            ]
+        });
+        console.log(JSON.parse(JSON.stringify(blog)));
+        hbsContent.blog = JSON.parse(JSON.stringify(blog));
+        res.render('blog', hbsContent);
+    }else{
+        hbsContent.loggedin = false;
+        hbsContent.userName = '';
         res.redirect('/login');
     }
 })
