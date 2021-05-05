@@ -8,7 +8,7 @@ let hbsContent = {
     userName: '',
     loggedin: false,
     title: 'You are not logged in today',
-    body: 'Hellow World',
+    body: 'Hello World',
     blogs: []
 };
 // support parsing of application/json type post data
@@ -22,7 +22,7 @@ app.set('view engine', 'handlebars');
 
 app.use(session({
     key: 'user_sid',
-    secret: 'somesecret',
+    secret: 'Super secret secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
