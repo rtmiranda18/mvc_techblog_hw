@@ -1,0 +1,17 @@
+#blogs .blog {
+    border: 1px solid #ccc;
+    position: relative;
+    padding: 40px 15px 10px;
+    margin: 10px;
+}
+
+.blog a {
+    background-color: #0077c0;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 15px;
+    text-decoration: none;
+}
