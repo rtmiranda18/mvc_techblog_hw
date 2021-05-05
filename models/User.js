@@ -1,7 +1,7 @@
 let Sequelize = require('sequelize');
 let bcrypt = require('bcrypt');
 
-const sequelize = new Sequelize('cms', 'root', 'password', {
+const sequelize = new Sequelize('techblog_db', 'root', 'password', {
     host: 'localhost',
     port: 3306,
     dialect: 'mysql'
