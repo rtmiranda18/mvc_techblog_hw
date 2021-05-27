@@ -14,3 +14,15 @@
         <button type="submit">Add Blog</button>
     </div>
 </form>
+<div id="blogs">
+    {{#each blogs}}
+        <div class="blog">
+            <a href="/blog/{{id}}">{{title}}</a>
+            <p>{{content}}</p>
+            <p>{{user.username}}</p>
+            <p>{{formatDate createdAt "DD/MM/YYYY"}}</p>
+        </div>
+    {{else}}
+        No Blogs Available!
+    {{/each}}
+</div>

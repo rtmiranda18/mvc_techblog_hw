@@ -150,11 +150,18 @@ app.route('/blog/:id').get(async (req, res) => {
 })
 
 // Route for User's Dashboard
-app.route('/dashboard').get((req, res) => {
+app.route('/dashboard').get(async (req, res) => {
     if(req.session.user && req.cookies.user_sid){
         hbsContent.loggedin = true;
         hbsContent.userName = req.session.user.username;
         hbsContent.title = "You are logged in";
+        const blogs_ = await Blog.findAll({
+            where: { author_id: req.session.user.id },
+            include: [
+                { model: User, as: 'user' }
+            ]
+        });
+        hbsContent.blogs = JSON.parse(JSON.stringify(blogs_));
         res.render('dashboard', hbsContent);
     }else{
         res.redirect('/login');
