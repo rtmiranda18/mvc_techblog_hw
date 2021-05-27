@@ -1,4 +1,4 @@
-const { User, Blog }    = require('./models');
+const { User, Blog, Comment }    = require('./models');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let express = require('express');
@@ -67,7 +67,9 @@ app.get('/', sessionChecker, (req, res) => {
 // Route for User's Login
 app.route('/login')
     .get((req, res) => {
-        if(!req.session.user && !req.cookies.user_sid){   
+        if(!req.session.user && !req.cookies.user_sid){
+            hbsContent.loggedin = false;
+            hbsContent.userName = '';   
             res.render('login', hbsContent);
         }else{
             res.redirect('/');
@@ -139,7 +141,13 @@ app.route('/blog/:id').get(async (req, res) => {
                 { model: User, as: 'user' }
             ]
         });
-        console.log(JSON.parse(JSON.stringify(blog)));
+        const comments_ = await Comment.findAll({
+            include: [
+                { model: Blog, as: 'blog' },
+                { model: User, as: 'user' }
+            ]
+        });
+        hbsContent.comments = JSON.parse(JSON.stringify(comments_));
         hbsContent.blog = JSON.parse(JSON.stringify(blog));
         res.render('blog', hbsContent);
     }else{
@@ -147,7 +155,19 @@ app.route('/blog/:id').get(async (req, res) => {
         hbsContent.userName = '';
         res.redirect('/login');
     }
-})
+}).post(async (req, res) => {
+    const createdComment = await Comment.create({
+        description: req.body.description,
+        blog_id: req.params.id,
+        author_id: req.session.user.id
+    }).then(comment => {
+        // console.log(blog.dataValues);
+        res.redirect('/blog/'+req.params.id);
+    }).catch(error => {
+        console.log(error);
+    })
+    createdComment.create();
+});
 
 // Route for User's Dashboard
 app.route('/dashboard').get(async (req, res) => {

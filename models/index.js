@@ -7,6 +7,21 @@ User.hasMany(Blog, {
     foreignKey: 'author_id'
 });
 
+Blog.hasMany(Comment, {
+    as: 'blogs',
+    foreignKey: 'blog_id'
+});
+
+Comment.belongsTo(Blog, {
+    as: 'blog',
+    foreignKey: 'blog_id'
+});
+
+Comment.belongsTo(User, {
+    as: 'user',
+    foreignKey: 'author_id'
+});
+
 Blog.belongsTo(User, {
     as: 'user',
     foreignKey: 'author_id'

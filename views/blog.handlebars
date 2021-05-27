@@ -2,3 +2,27 @@
 <p>{{blog.content}}</p>
 <p>{{blog.user.username}}</p>
 <p>{{formatDate blog.createdAt "DD/MM/YYYY"}}</p>
+
+<div id="comments">
+    {{#each comments}}
+        <div class="comment">
+            <a href="/comment/{{id}}">{{title}}</a>
+            <p>{{description}}</p>
+            <p>{{user.username}}</p>
+            <p>{{formatDate createdAt "DD/MM/YYYY"}}</p>
+        </div>
+    {{else}}
+        No Comments Available!
+    {{/each}}
+</div>
+
+<form action="/blog/{{blog.id}}" method="POST">
+    <div>
+        <label>Comment:</label>
+        <textarea name="description"></textarea>
+    </div>
+    
+    <div>
+        <button type="submit">Add Comment</button>
+    </div>
+</form>
