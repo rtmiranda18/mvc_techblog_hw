@@ -14,6 +14,8 @@ let hbsContent = {
     blogs: []
 };
 
+const PORT = process.env.PORT || 3000;
+
 let hbsEngine = exphbs.create({
     helpers: {
         formatDate: function (date, format) {
@@ -264,4 +266,4 @@ app.get('/logout', (req, res) => {
 app.use((req, res, next) => {
     res.status(404).send("Error 404, Page not found!");
 })
-app.listen(3000);
+app.listen(PORT);
