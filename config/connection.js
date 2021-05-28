@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 var sequelize;
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.JAWSDB_URL) {
     sequelize = new Sequelize('techblog_db', 'root', 'password', {
         host: 'localhost',
         port: 3306,
