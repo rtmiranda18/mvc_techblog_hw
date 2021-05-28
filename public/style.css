@@ -23,6 +23,7 @@
 #navigation ul {
     display: flex;
     flex-direction: row;
+    background-color: #ccc;
 }
 
 #navigation ul li {
@@ -34,4 +35,12 @@
     color: #000;
     font-size: 20px;
     margin-right: 50px;
+}
+
+#header {
+    font-size: 50px;
+    text-align: center;
+    background-color: #0077c0;
+    color: #fff;
+    height: 75px;
 }
