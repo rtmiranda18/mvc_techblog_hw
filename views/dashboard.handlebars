@@ -1,25 +1,27 @@
 <div id="dashboard">
     <h1>Dashboard</h1>
-    <form action="/dashboard" method="POST">
+    <form action="/dashboard/{{blogID}}" method="POST">
         <div>
             <label>Title:</label>
-            <input type="text" name="title" />
+            <input type="text" name="title" value="{{blogTitle}}" />
         </div>
 
         <div>
             <label>Content:</label>
-            <textarea name="content"></textarea>
+            <textarea name="content">{{blogContent}}</textarea>
         </div>
         
         <div>
-            <button type="submit">Add Blog</button>
+            <button type="submit">
+            {{#if blogID}} Update {{else}} Add {{/if}} Blog
+        </button>
         </div>
     </form>
 </div>
 <div id="blogs">
     {{#each blogs}}
         <div class="blog">
-            <a class="blogtitle" href="/blog/{{id}}">{{title}}</a>
+            <a class="blogtitle" href="/dashboard/{{id}}">{{title}}</a>
             <p>{{content}}</p>
             <p>{{user.username}}</p>
             <p>{{formatDate createdAt "DD/MM/YYYY"}}</p>

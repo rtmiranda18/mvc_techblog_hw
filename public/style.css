@@ -21,15 +21,15 @@
 }
 
 #navigation ul {
-    display: flex;
-    flex-direction: row;
     background-color: #ccc;
     height: 40px;
     margin: 0 0 0;
+    text-align: center;
 }
 
 #navigation ul li {
     list-style: none;
+    display: inline;
 }
 
 #navigation ul li a {
@@ -53,7 +53,7 @@
     border-radius: 10px;
     width: 25%;
     margin: 20px 50px;
-    padding: 30px;
+    padding: 50px;
 }
 
 #login h1 {
@@ -66,6 +66,11 @@
 
 #login button {
     float: right;
+}
+
+#login a {
+    clear: both;
+    float: left;
 }
 
 #dashboard { 
@@ -105,4 +110,17 @@
     right: 0;
     padding: 12px 15px;
     text-decoration: none;
+}
+
+.newComment {
+    border: 2px solid #000;
+    background-color: #ccc;
+    border-radius: 10px;
+    width: 25%;
+    margin: 20px 50px;
+    padding: 30px;
+}
+
+.newComment button {
+    float: right;
 }

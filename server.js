@@ -192,6 +192,9 @@ app.route('/dashboard').get(async (req, res) => {
                 { model: User, as: 'user' }
             ]
         });
+        hbsContent.blogID = '';
+        hbsContent.blogTitle = '';
+        hbsContent.blogContent = '';
         hbsContent.blogs = JSON.parse(JSON.stringify(blogs_));
         res.render('dashboard', hbsContent);
     }else{
@@ -209,6 +212,40 @@ app.route('/dashboard').get(async (req, res) => {
         console.log(error);
     })
     createdBlog.create();
+});
+
+// Update Blogpost 
+app.route('/dashboard/:id').get(async (req, res) => {
+    if(req.session.user && req.cookies.user_sid){
+        hbsContent.loggedin = true;
+        hbsContent.userName = req.session.user.username;
+        hbsContent.title = "You are logged in";
+        const blog = await Blog.findOne({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        });
+        const {id, title, content} = JSON.parse(JSON.stringify(blog.dataValues));
+        console.log(title);
+        hbsContent.blogID = id;
+        hbsContent.blogTitle = title;
+        hbsContent.blogContent = content;
+        res.render('dashboard', hbsContent);
+    }else{
+        hbsContent.loggedin = false;
+        hbsContent.userName = '';
+        res.redirect('/login');
+    }
+}).post(async (req, res) => {
+    // console.log(req);
+    await Blog.update(
+        {
+            title: req.body.title,
+            content: req.body.content
+        },
+        { where: { id: parseInt(req.params.id) } }
+    )
+    res.redirect('/dashboard');
 });
 
 // Route for User's Logout
