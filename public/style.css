@@ -53,6 +53,7 @@
     border-radius: 10px;
     width: 25%;
     margin: 20px 50px;
+    padding: 30px;
 }
 
 #login h1 {
@@ -73,6 +74,7 @@
     border-radius: 10px;
     width: 25%;
     margin: 20px 50px;
+    padding: 30px;
 }
 
 #dashboard h1 {
@@ -85,4 +87,22 @@
 
 #dashboard button {
     float: right;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    position: relative;
+    padding: 40px 15px 10px;
+    margin: 10px;
+}
+
+.comment a {
+    background-color: #0077c0;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 15px;
+    text-decoration: none;
 }
