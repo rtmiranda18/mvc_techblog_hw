@@ -9,7 +9,7 @@
     margin: 10px;
 }
 
-.blog a {
+.blog a.blogtitle {
     background-color: #0077c0;
     color: #fff;
     position: absolute;

@@ -169,6 +169,17 @@ app.route('/blog/:id').get(async (req, res) => {
     createdComment.create();
 });
 
+// Delete Blogpost on Dashboard
+app.route('/blog/delete/:id').get(async (req, res) => {
+    await Blog.destroy({
+        where: {
+            id: req.params.id
+        },
+    }).then(() => res.redirect('/dashboard')).catch(error => {
+        console.log(error);
+    });
+});
+
 // Route for User's Dashboard
 app.route('/dashboard').get(async (req, res) => {
     if(req.session.user && req.cookies.user_sid){

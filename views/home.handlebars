@@ -3,7 +3,7 @@
 <div id="blogs">
     {{#each blogs}}
         <div class="blog">
-            <a href="/blog/{{id}}">{{title}}</a>
+            <a class="blogtitle" href="/blog/{{id}}">{{title}}</a>
             <p>{{content}}</p>
             <p>{{user.username}}</p>
             <p>{{formatDate createdAt "DD/MM/YYYY"}}</p>
