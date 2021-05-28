@@ -1,19 +1,21 @@
-<h1>Dashboard</h1>
-<form action="/dashboard" method="POST">
-    <div>
-        <label>Title:</label>
-        <input type="text" name="title" />
-    </div>
+<div id="dashboard">
+    <h1>Dashboard</h1>
+    <form action="/dashboard" method="POST">
+        <div>
+            <label>Title:</label>
+            <input type="text" name="title" />
+        </div>
 
-    <div>
-        <label>Content:</label>
-        <textarea name="content"></textarea>
-    </div>
-    
-    <div>
-        <button type="submit">Add Blog</button>
-    </div>
-</form>
+        <div>
+            <label>Content:</label>
+            <textarea name="content"></textarea>
+        </div>
+        
+        <div>
+            <button type="submit">Add Blog</button>
+        </div>
+    </form>
+</div>
 <div id="blogs">
     {{#each blogs}}
         <div class="blog">
